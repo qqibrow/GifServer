@@ -1,4 +1,5 @@
 import os
+from moviepy.editor import *
 # We'll render HTML templates and access data sent by POST
 # using the request object from flask. Redirect and url_for
 # will be used to redirect the user once the upload is done
@@ -43,7 +44,15 @@ def upload():
         # Redirect the user to the uploaded_file route, which
         # will basicaly show on the browser the uploaded file
         #return "receved video " + filename
-        return redirect(url_for('uploaded_file',filename=filename))
+        clip = (VideoFileClip('./uploads/' + filename, audio=False)
+                .subclip((0,00.05),(0,01.00)).resize(0.3))
+        text = (TextClip("Working hard to DEMO!", fontsize=30, color='black',font='Amiri-Bold')
+                .set_pos((0,0)).set_duration(clip.duration))
+        composition = CompositeVideoClip([clip, text])
+        gif_file_name = filename.split('.',1)[0] + '.gif'
+        print gif_file_name
+        composition.write_gif("./uploads/" + gif_file_name, fps=10, fuzz=2)
+        return redirect(url_for('uploaded_file',filename=gif_file_name))
 
 # This route is expecting a parameter containing the name
 # of a file. Then it will locate that file on the upload
