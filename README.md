@@ -19,6 +19,17 @@ Please follow the install instruction [here](http://zulko.github.io/moviepy/inst
 Additional requirement from moviepy is Pillow, which will be used for the resize functionality. Simple run:
 pip install pillow should be fine.
 
+Trouble shooting
+If you are mac user, and met this problem: 
+
+unable to read font: xxxxxx
+unable to read font: xxxxxx
+
+This error can be due to the fact that ImageMagick is not installed on your computer, or (for Windows users) that you didn't specify the path to the ImageMagick binary in file conf.py, or.that the path you specified is incorrect
+
+Please refer to https://github.com/Zulko/moviepy/issues/36
+
+
 
 
 
